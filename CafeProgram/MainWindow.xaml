@@ -1,0 +1,231 @@
+﻿<Window x:Class="CafeProgram.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CafeProgram"
+        mc:Ignorable="d"
+        Title="Coffee POS App" Height="680" Width="990">
+
+    <Window.Resources>
+        <Style x:Key="button_Effect" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.7" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" HorizontalAlignment="Left" Source="/Images/mdslogo.png" Margin="3"/>
+            <Grid Grid.Column="1">
+                <TextBlock x:Name="versionTextBox" VerticalAlignment="Center" FontSize="25" Foreground="Black" HorizontalAlignment="Center" Margin="0,0,0,0" FontWeight="Bold"/>
+                <Button HorizontalAlignment="Right" Width="50" Background="{x:Null}" Click="exit_Clicked" BorderBrush="{x:Null}" Style="{StaticResource button_Effect}" Margin="0,0,17,3">
+                    <Image Source="/Images/exit.png" Height="30"/>
+                </Button>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="18*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="3" Background="#FF636363" Opacity="0.5"/>
+            <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="2">
+                <TextBlock Foreground="White" FontSize="25" VerticalAlignment="Center" Text="Order Content" FontWeight="Bold"/>
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="34*"/>
+                    <ColumnDefinition Width="13*"/>
+                    <ColumnDefinition Width="26*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBox_name" HorizontalAlignment="Center" VerticalAlignment="Center"  TextWrapping="Wrap" Text="Menu" Focusable="False" IsTabStop="False" AllowDrop="False" FontSize="22" FontWeight="Bold" Background="{x:Null}" Opacity="0.5" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderThickness="0" IsEnabled="False" Margin="2,2,26,1"/>
+                <TextBox Grid.Row="0" Grid.Column="2" x:Name="textBox_qty" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Qty" Focusable="False" IsTabStop="False" AllowDrop="False" FontSize="18" FontWeight="Bold" Background="{x:Null}" Opacity="0.5" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderThickness="0" IsEnabled="False" Margin="1,3,0,3"/>
+                <TextBox Grid.Row="0" Grid.Column="3" x:Name="textBox_money" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Price" Focusable="False" IsTabStop="False" AllowDrop="False" FontSize="19" FontWeight="Bold" Background="{x:Null}" Opacity="0.5" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderThickness="0" IsEnabled="False" Margin="11,2,11,1"/>
+
+                <ListView Grid.Row="1" Grid.Column="0" x:Name="listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="#FF632525" Foreground="White" Opacity="0.8" Grid.ColumnSpan="2" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}" BorderThickness="0" IsHitTestVisible="False"/>
+                <ListView Grid.Row="1" Grid.Column="2" x:Name="listViewQty" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF632525" Foreground="White" Opacity="0.8" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" IsHitTestVisible="False"/>
+                <ListView Grid.Row="1" Grid.Column="3" x:Name="listViewMoney" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="#FF632525" Foreground="White" Opacity="0.8" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" IsHitTestVisible="False"/>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Row="1" Grid.Column="0" Text="Total :" TextAlignment="Right" VerticalAlignment="Center" Focusable="False" IsTabStop="False" AllowDrop="False" FontSize="20" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderThickness="0" IsEnabled="False" Margin="0,0,10,0"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="total_Textbox" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Focusable="False" IsTabStop="False" AllowDrop="False" FontSize="20" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderThickness="0" IsEnabled="False"/>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="2">
+                <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Button x:Name="pay_Button" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10" Click="pay_Clicked" Background="#FF188D62">
+                        <TextBlock VerticalAlignment="Center" Foreground="White" FontSize="25" Text="Pay"></TextBlock>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="1" Grid.RowSpan="8" Grid.Column="1" Grid.ColumnSpan="7" Background="#FF636363" Opacity="0.5"/>
+            <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="2">
+                <TextBlock Foreground="White" FontSize="25" VerticalAlignment="Center" Text="Menu" FontWeight="Bold"/>
+            </Grid>
+
+            <Button x:Name="menu1_Button" Grid.Row="3" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="menu_Clicked" FontSize="14" FontWeight="Bold" Foreground="Black" Style="{StaticResource button_Effect}">
+                <Button.Content>
+                    Americano \3000
+                </Button.Content>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/americano.jpg" />
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="menu2_Button" Grid.Row="3" Grid.Column="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="menu_Clicked" FontSize="14" FontWeight="Bold" Foreground="White" Style="{StaticResource button_Effect}">
+                <Button.Content>
+                    Caffe Mocha \3500
+                </Button.Content>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/cafemocca.jpg"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="menu3_Button" Grid.Row="3" Grid.Column="6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="menu_Clicked" FontSize="14" FontWeight="Bold" Foreground="White" Style="{StaticResource button_Effect}">
+                <Button.Content>
+                    Cappuccino \3500
+                </Button.Content>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/cappuccino.jpg"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="menu4_Button" Grid.Row="5" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="menu_Clicked" FontSize="14" FontWeight="Bold" Foreground="White" Style="{StaticResource button_Effect}">
+                <Button.Content>
+                    Caramel Macchiato \3500
+                </Button.Content>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/caramel.jpg"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="menu5_Button" Grid.Row="5" Grid.Column="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="menu_Clicked" FontSize="14" FontWeight="Bold" Foreground="White" Style="{StaticResource button_Effect}">
+                <Button.Content>
+                    Espresso \3000
+                </Button.Content>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/Espresso.jpg"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="menu6_Button" Grid.Row="5" Grid.Column="6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="menu_Clicked" FontSize="14" FontWeight="Bold" Foreground="White" Style="{StaticResource button_Effect}">
+                <Button.Content>
+                    Flat White \3500
+                </Button.Content>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/flatwhite.jpg"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="menu7_Button" Grid.Row="7" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="menu_Clicked" FontSize="14" FontWeight="Bold" Foreground="White" Style="{StaticResource button_Effect}">
+                <Button.Content>
+                    Green Tea Latte \4000
+                </Button.Content>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/greentea.png"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="menu8_Button" Grid.Row="7" Grid.Column="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="menu_Clicked" FontSize="14" FontWeight="Bold" Foreground="Black" Style="{StaticResource button_Effect}">
+                <Button.Content>
+                    Java Chip \4000
+                </Button.Content>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/javachip.png"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="menu9_Button" Grid.Row="7" Grid.Column="6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="menu_Clicked" FontSize="14" FontWeight="Bold" Foreground="White" Style="{StaticResource button_Effect}">
+                <Button.Content>
+                    Java Chip \4000
+                </Button.Content>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/latte.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
